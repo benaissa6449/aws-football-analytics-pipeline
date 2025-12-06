@@ -1,0 +1,14 @@
+Ce qu’il te manque pour valider le projet
+Automatisation de bout en bout : il faut préciser que le déploiement et l’exécution du pipeline sont automatisés avec Terraform (infrastructure as code), ce qui assurera la reproductibilité et la gestion des ressources AWS sans intervention manuelle.​​
+
+Gestion des accès et de la sécurité : il manque la mention des rôles IAM, l’isolation réseau via VPC, et la gestion des accès pour sécuriser le data lake et les jobs ETL.
+
+Monitoring et logs : il faut inclure la supervision du pipeline avec CloudWatch (alertes, logs, métriques), utile pour le suivi et la fiabilité du pipeline.
+
+Scénario métier original : le diagramme présente le technique, mais il faut ajouter dans ta présentation le contexte métier du client (quel type d’analyse de données foot ? Prédictions, statistiques avancées, visualisations, etc. ?).
+
+Analyse du coût : prépare une estimation du coût d’utilisation des services AWS choisis pour le pipeline.​​
+
+Documentation et Git : prévois un dépôt Git rassemblant les diagrammes, le code Terraform, la documentation, et le script de restitution.
+
+Demo du pipeline : pour la validation, inclue une démo directe ou vidéo montrant le pipeline automatisé en action, de l’ingestion à la restitution.
