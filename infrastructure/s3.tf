@@ -66,6 +66,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "data" {
   rule {
     id     = "archive-old-data"
     status = "Enabled"
+    filter {}
 
     transition {
       days          = 90

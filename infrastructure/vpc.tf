@@ -15,7 +15,7 @@ resource "aws_subnet" "public" {
   count                   = 2
   vpc_id                  = aws_vpc.main.id
   cidr_block              = "10.0.${count.index + 1}.0/24"
-  availability_zone       = data.aws_availability_zones.available.names[count.index]
+  availability_zone       = count.index == 0 ? "${var.aws_region}a" : "${var.aws_region}b"
   map_public_ip_on_launch = true
 
   tags = {
@@ -28,17 +28,17 @@ resource "aws_subnet" "private" {
   count             = 2
   vpc_id            = aws_vpc.main.id
   cidr_block        = "10.0.${count.index + 10}.0/24"
-  availability_zone = data.aws_availability_zones.available.names[count.index]
+  availability_zone = count.index == 0 ? "${var.aws_region}a" : "${var.aws_region}b"
 
   tags = {
     Name = "${var.project_name}-private-subnet-${count.index + 1}"
   }
 }
 
-# Data source pour les zones disponibles
-data "aws_availability_zones" "available" {
-  state = "available"
-}
+# Data source pour les zones disponibles - SUPPRIMÉE (nécessite permission EC2)
+# data "aws_availability_zones" "available" {
+#   state = "available"
+# }
 
 # Internet Gateway
 resource "aws_internet_gateway" "main" {

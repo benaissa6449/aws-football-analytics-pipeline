@@ -1,12 +1,15 @@
-# Requirements pour Python
+# Requirements pour Python - Football Goals Streaming Pipeline
 
-# AWS
+# AWS SDK - Pour interaction avec les services AWS (Kinesis, S3, Firehose, IAM)
 boto3>=1.26.0
 botocore>=1.29.0
 
-# Données
+# Traitement de données - Pour lire et traiter les fichiers CSV
 pandas>=1.5.0
 pyarrow>=10.0.0
+
+# Utilitaires pour Cloud9 et environnement AWS
+python-dotenv>=0.20.0  # Pour charger les variables d'environnement depuis .env
 
 # Logging
 python-json-logger>=2.0.0

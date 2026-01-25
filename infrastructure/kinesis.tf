@@ -26,10 +26,9 @@ resource "aws_kinesis_firehose_delivery_stream" "goals" {
   extended_s3_configuration {
     role_arn           = aws_iam_role.firehose_role.arn
     bucket_arn         = aws_s3_bucket.data.arn
-    prefix             = "goals_raw/"
+    prefix             = "goals_raw/YYYY/MM/DD/HH/"
     error_output_prefix = "goals_raw_errors/!{firehose:error-output-type}/!{timestamp:yyyy/MM/dd}/"
-    buffer_size        = 5
-    buffer_interval    = 300
+    compression_format = "GZIP"
 
     cloudwatch_logging_options {
       enabled         = true
