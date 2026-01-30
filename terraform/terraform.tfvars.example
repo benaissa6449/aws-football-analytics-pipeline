@@ -1,0 +1,56 @@
+# Exemple de fichier terraform.tfvars
+# Copiez ce fichier en terraform.tfvars et adaptez les valeurs
+
+# ========================
+# AWS Configuration
+# ========================
+aws_region = "us-east-1"
+environment = "dev"
+project_name = "football-pipeline"
+
+# ========================
+# Kinesis Configuration
+# ========================
+kinesis_stream_name = "goals-stream"
+kinesis_shard_count = 1              # Augmentez pour plus de throughput
+kinesis_retention_period = 24        # Heures
+
+# ========================
+# Firehose Configuration
+# ========================
+firehose_stream_name = "goals-firehose"
+firehose_buffer_size_mb = 5          # Taille du buffer avant écriture S3
+firehose_buffer_interval_sec = 300   # Intervalle avant écriture (5 min)
+
+# ========================
+# Glue Configuration
+# ========================
+glue_database_name = "football_db"
+glue_crawler_name = "football-crawler"
+glue_job_name = "football-csv-to-parquet"
+glue_worker_type = "G.2X"            # G.1X (économe), G.2X (standard), G.025X (powerful)
+glue_num_workers = 2                 # Nombre de workers
+glue_job_timeout = 2880              # Minutes
+
+# ========================
+# Athena Configuration
+# ========================
+athena_workgroup_name = "football-workgroup"
+athena_query_timeout_minutes = 30
+
+# ========================
+# S3 Configuration
+# ========================
+s3_enable_versioning = true
+s3_enable_encryption = true
+s3_block_public_access = true
+
+# ========================
+# Tags additionnels
+# ========================
+additional_tags = {
+  "Team"        = "Data Engineering"
+  "Owner"       = "Ismail Benaissa"
+  "CostCenter"  = "Analytics"
+  "Application" = "Football Pipeline"
+}

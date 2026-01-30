@@ -33,10 +33,12 @@ spark = glueContext.spark_session
 job = Job(glueContext)
 job.init(args["JOB_NAME"], args)
 
-# Paramètres CORRECTS
-S3_BUCKET = "football-pipeline-data-624409990811-us-east-1"
-S3_INPUT_PATH = f"s3://{S3_BUCKET}/matches/"
-S3_OUTPUT_PATH = f"s3://{S3_BUCKET}/parquet/"
+# Paramètres CORRECTS - Compte AWS 249399230817
+ACCOUNT_ID = "249399230817"
+S3_INPUT_BUCKET = f"football-pipeline-dev-raw-{ACCOUNT_ID}"
+S3_OUTPUT_BUCKET = f"football-pipeline-dev-processed-{ACCOUNT_ID}"
+S3_INPUT_PATH = f"s3://{S3_INPUT_BUCKET}/matches/"
+S3_OUTPUT_PATH = f"s3://{S3_OUTPUT_BUCKET}/parquet/"
 DATABASE_NAME = "football_db"
 
 logger.info(f"Job: {args['JOB_NAME']}")
@@ -56,15 +58,32 @@ try:
     # 2. Nettoyage et transformation des données
     logger.info("🧹 Nettoyage et transformation...")
     
-    # Cast types de colonnes
+    # Cast types de colonnes - 23 colonnes du CSV
     df_cleaned = df \
         .withColumn("match_id", col("match_id").cast("int")) \
         .withColumn("home_team_id", col("home_team_id").cast("int")) \
         .withColumn("away_team_id", col("away_team_id").cast("int")) \
+        .withColumn("home_team", col("home_team").cast("string")) \
+        .withColumn("away_team", col("away_team").cast("string")) \
         .withColumn("fulltime_home", col("fulltime_home").cast("int")) \
         .withColumn("fulltime_away", col("fulltime_away").cast("int")) \
         .withColumn("halftime_home", col("halftime_home").cast("int")) \
-        .withColumn("halftime_away", col("halftime_away").cast("int"))
+        .withColumn("halftime_away", col("halftime_away").cast("int")) \
+        .withColumn("penalty_home", col("penalty_home").cast("int")) \
+        .withColumn("penalty_away", col("penalty_away").cast("int")) \
+        .withColumn("ref_id", col("ref_id").cast("int")) \
+        .withColumn("referee", col("referee").cast("string")) \
+        .withColumn("assists_home", col("assists_home").cast("int")) \
+        .withColumn("assists_away", col("assists_away").cast("int")) \
+        .withColumn("yellow_cards_home", col("yellow_cards_home").cast("int")) \
+        .withColumn("yellow_cards_away", col("yellow_cards_away").cast("int")) \
+        .withColumn("red_cards_home", col("red_cards_home").cast("int")) \
+        .withColumn("red_cards_away", col("red_cards_away").cast("int")) \
+        .withColumn("stadium", col("stadium").cast("string")) \
+        .withColumn("attendance", col("attendance").cast("int")) \
+        .withColumn("date_utc", col("date_utc").cast("string")) \
+        .withColumn("season", col("season").cast("string")) \
+        .withColumn("competition", col("competition").cast("string"))
     
     # Supprimer les lignes avec match_id NULL
     df_cleaned = df_cleaned.filter(col("match_id").isNotNull())

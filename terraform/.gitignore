@@ -1,0 +1,76 @@
+# Terraform files
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+tfplan
+*.tfplan
+
+# Backup files
+*.backup
+*.bak
+~*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+.env
+.env.local
+
+# Logs
+*.log
+deployment.log
+crash.log
+
+# Build artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# AWS
+aws_credentials
+.aws/
+
+# Python
+venv/
+env/
+.virtualenv
+.pytest_cache/
+
+# Lambda deployment packages
+*.zip
+lambda_firehose_transformer.zip
+
+# Secrets and credentials (NEVER COMMIT)
+secrets.tf
+*secrets*
+*password*
+*key*
+.env.production
+
+# Terraform workspace
+terraform.tfvars  # If contains sensitive data
+!terraform.tfvars.example
+
+# Generated files
+graph.svg
+TERRAFORM_DOCS.md
+.terraform-docs.yml
+
+# Test files
+test-results/
+coverage/
+
+# Backups
+backups/
+*.tar.gz
