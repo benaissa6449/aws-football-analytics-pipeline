@@ -48,6 +48,24 @@ env/
 
 # IDE
 .vscode/
+
+# Security - Private Keys & Credentials
+*.pem
+*.key
+*.ppk
+*.p12
+*.pfx
+*.jks
+.env
+.env.local
+credentials.json
+aws_credentials
+config.ini
+terraform.tfvars
+*.private
+
+# AWS
+.aws/
 .idea/
 *.swp
 *.swo
